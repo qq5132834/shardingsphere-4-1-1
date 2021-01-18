@@ -23,6 +23,10 @@ insert
     : INSERT insertSpecification_ INTO? tableName partitionNames_? (insertValuesClause | setAssignmentsClause | insertSelectClause) onDuplicateKeyClause?
     ;
 
+ree
+    : REE tableName DEDUCTION_ tableName
+    ;
+
 insertSpecification_
     : (LOW_PRIORITY | DELAYED | HIGH_PRIORITY)? IGNORE?
     ;

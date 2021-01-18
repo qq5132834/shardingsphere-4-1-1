@@ -22,6 +22,7 @@ import Symbol, Comments, DMLStatement, DDLStatement, TCLStatement, DCLStatement,
 execute
     : (select
     | insert
+    | ree
     | update
     | delete
     | replace

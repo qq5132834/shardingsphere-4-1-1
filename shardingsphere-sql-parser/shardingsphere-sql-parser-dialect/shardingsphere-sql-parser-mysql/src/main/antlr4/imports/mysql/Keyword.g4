@@ -31,6 +31,10 @@ INSERT
     : I N S E R T
     ;
 
+REE
+    : R E E
+    ;
+
 UPDATE
     : U P D A T E
     ;
