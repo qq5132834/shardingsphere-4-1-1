@@ -23,6 +23,7 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.apache.shardingsphere.sql.parser.api.ASTNode;
 import org.apache.shardingsphere.sql.parser.autogen.MySQLStatementBaseVisitor;
+import org.apache.shardingsphere.sql.parser.autogen.MySQLStatementParser;
 import org.apache.shardingsphere.sql.parser.autogen.MySQLStatementParser.DataTypeLengthContext;
 import org.apache.shardingsphere.sql.parser.autogen.MySQLStatementParser.DataTypeContext;
 import org.apache.shardingsphere.sql.parser.autogen.MySQLStatementParser.AggregationFunctionContext;
@@ -122,7 +123,23 @@ import java.util.List;
 public abstract class MySQLVisitor extends MySQLStatementBaseVisitor<ASTNode> {
     
     private int currentParameterIndex;
-    
+
+    @Override
+    public ASTNode visitRee(MySQLStatementParser.ReeContext ctx) {
+        TerminalNode terminalNode = ctx.DEDUCTION_();
+        if(terminalNode != null){
+            System.out.println(this.getClass().getSimpleName() + ".visitRee:" + terminalNode.getText());
+        }
+        List<TableNameContext> tableNameContextList = ctx.tableName();
+        if(tableNameContextList != null && tableNameContextList.size() > 0){
+            for (TableNameContext tableNameContext : tableNameContextList) {
+                String tableName = tableNameContext.getText();
+                System.out.println(this.getClass().getSimpleName() + ".visitRee.tablename:" + tableName);
+            }
+        }
+        return super.visitRee(ctx);
+    }
+
     @Override
     public final ASTNode visitParameterMarker(final ParameterMarkerContext ctx) {
         return new ParameterMarkerValue(currentParameterIndex++);
