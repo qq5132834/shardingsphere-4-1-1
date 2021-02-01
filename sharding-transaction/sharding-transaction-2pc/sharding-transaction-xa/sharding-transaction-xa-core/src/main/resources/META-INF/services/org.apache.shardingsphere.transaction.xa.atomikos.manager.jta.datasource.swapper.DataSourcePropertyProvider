@@ -15,4 +15,4 @@
 # limitations under the License.
 #
 
-org.apache.shardingsphere.transaction.xa.atomikos.manager.XAShardingTransactionManager
+org.apache.shardingsphere.transaction.xa.atomikos.manager.jta.datasource.swapper.impl.HikariCPPropertyProvider
