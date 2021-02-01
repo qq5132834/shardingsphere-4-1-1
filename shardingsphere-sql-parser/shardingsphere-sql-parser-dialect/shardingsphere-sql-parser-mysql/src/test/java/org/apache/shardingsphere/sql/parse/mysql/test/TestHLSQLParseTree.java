@@ -15,7 +15,7 @@ import java.io.InputStream;
 /***
  * 语法解析
  */
-public class SQLParseTreeTest extends MySQLVisitor {
+public class TestHLSQLParseTree extends MySQLVisitor {
 
     @Override
     public ASTNode visitRee(MySQLStatementParser.ReeContext ctx) {
@@ -24,7 +24,7 @@ public class SQLParseTreeTest extends MySQLVisitor {
     }
 
     public static void main(String[] args) throws Exception{
-        SQLParseTreeTest exec = new SQLParseTreeTest();
+        TestHLSQLParseTree exec = new TestHLSQLParseTree();
         String execString = "select c1,c2 from table0 where c1 = 1 order by c3 ";
         execString = "ree table1 -> table2";
         InputStream input = null;
