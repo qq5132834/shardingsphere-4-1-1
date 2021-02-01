@@ -28,10 +28,10 @@
     <packaging>pom</packaging>
     
     <modules>
-        <module>shardingsphere-sql-parser-sql92</module>
+<!--        <module>shardingsphere-sql-parser-sql92</module>-->
         <module>shardingsphere-sql-parser-mysql</module>
-        <module>shardingsphere-sql-parser-postgresql</module>
-        <module>shardingsphere-sql-parser-oracle</module>
-        <module>shardingsphere-sql-parser-sqlserver</module>
+<!--        <module>shardingsphere-sql-parser-postgresql</module>-->
+<!--        <module>shardingsphere-sql-parser-oracle</module>-->
+<!--        <module>shardingsphere-sql-parser-sqlserver</module>-->
     </modules>
 </project>
