@@ -53,10 +53,10 @@ public class TestHLShardingJdbc {
             /**
              *  自定义查询算法
              */
-            tableRuleConfiguration.setDatabaseShardingStrategyConfig(
-                    new InlineShardingStrategyConfiguration("user_id", "test${user_id % 2}"));
-//        TestHLPreciseShardingAlgorithm testHLPreciseShardingAlgorithm = new TestHLPreciseShardingAlgorithm();
-//        tableRuleConfiguration.setTableShardingStrategyConfig(new StandardShardingStrategyConfiguration("order_id", testHLPreciseShardingAlgorithm));
+//            tableRuleConfiguration.setDatabaseShardingStrategyConfig(
+//                    new InlineShardingStrategyConfiguration("user_id", "test${user_id % 2}"));
+            TestHLDatabasePreciseShardingAlgorithm testHLDatabasePreciseShardingAlgorithm = new TestHLDatabasePreciseShardingAlgorithm();
+            tableRuleConfiguration.setDatabaseShardingStrategyConfig(new StandardShardingStrategyConfiguration("order_id", testHLDatabasePreciseShardingAlgorithm));
 
             TestHLComplexKeysShardingAlgorithm testHLComplexKeysShardingAlgorithm = new TestHLComplexKeysShardingAlgorithm();
             tableRuleConfiguration.setTableShardingStrategyConfig(new ComplexShardingStrategyConfiguration("user_id, order_id", testHLComplexKeysShardingAlgorithm));
@@ -69,7 +69,7 @@ public class TestHLShardingJdbc {
         DataSource dataSource = ShardingDataSourceFactory.createDataSource(dataSourceMap, shardingRuleConfiguration, new Properties());
         ShardingDataSource shardingDataSource = (ShardingDataSource) dataSource;
         selectSQL(shardingDataSource);
-
+        insertSQL(shardingDataSource);
     }
 
     public static void selectSQL(DataSource dataSource){
@@ -78,6 +78,7 @@ public class TestHLShardingJdbc {
             HintManager hintManager = HintManager.getInstance();
 
             String sql = "select id, user_id, order_id from t_order p where user_id = 2 and order_id = 2";
+            sql = "select id, user_id, order_id from t_order p where order_id = 2";
 //            sql = "ree table0 -> table1 ";
             Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -114,8 +115,8 @@ public class TestHLShardingJdbc {
             String sql = "insert into t_order (user_id, order_id) values (?, ?)";
             Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, 2);
-            preparedStatement.setInt(2, 2);
+            preparedStatement.setInt(1, 4);
+            preparedStatement.setInt(2, 4);
             preparedStatement.execute();
             if(preparedStatement != null){
                 preparedStatement.close();
